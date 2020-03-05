@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Formulário</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <h1>Formulário</h1>
+    <form action="resposta.html" method="GET">
+
+        <fieldset>
+            <legend>Informações Pessoais</legend>
+            <p>
+                <label for="nome">Nome completo:</label>
+                <input type="text" id="" placeholder="Usuário" name="">
+            </p>
+            <p>
+                <label for="senha">Senha completa:</label>
+                <input type="password" id="senha" value="" placeholder="Senha" name="">
+            </p>
+        </fieldset>
+
+        <p><input type="button" id="" value="Botão" name=""></p>
+        <p><input type="date"></p>
+        <p><input type="color"></p>
+        <p><input type="number" placeholder="Números"></p>
+        <p><input type="range" value="50" min="0" max="100"></p>
+        <p><input type="email" placeholder="Email"></p>
+        <p><input type="submit" value="Enviar Formulário"></p>
+        <p><input type="checkbox" name="carros[]" value="monza">Monza</p>
+        <p><input type="checkbox" name="carros[]" value="opala">Opala</p>
+        <p><input type="checkbox" name="carros[]" value="ferrari">Ferrari</p>
+
+        <br>
+        <p><input type="radio" name="sexo" value="masculino">Masculino</p>
+        <p><input type="radio" name="sexo" value="feminino">Feminino</p>
+        <p><input type="radio" name="sexo" value="outro">Outro</p>
+        <br>
+        <p><input type="radio" name="monster" value="pokemon">Pokemon</p>
+        <p><input type="radio" name="monster" value="digimon" checked>Digimon</p>
+        <br>
+        <p><input type="hidden" value=""></p>
+        <p><input type="file" value=""></p>
+        <p><input type="image" value="img"></p>
+
+        <br>
+        <p>
+            <select name="carros" id="idCarros">
+                <option value="monza">Monza</option>
+                <option value="opala">Opala</option>
+                <option value="ferrari">Ferrari</option>
+            </select>
+        </p>
+        <p>
+            <textarea name="" id="" cols="30" rows="10"></textarea>
+        </p>
+    </form>
+</body>
+
+</html>

@@ -1,0 +1,27 @@
+* {
+    box-sizing: border-box
+}
+
+.container {
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 10px;
+    height: 400px;
+}
+
+.item-header {
+    grid-row: 1;
+    grid-column: 1 / 5;
+}
+
+div[class^="item"] {
+    border: 1px solid black;
+    border-radius: 5px;
+    text-align: left;
+}
+
+.item-footer {
+    grid-row: 4;
+    grid-column: 1 / 5;
+}

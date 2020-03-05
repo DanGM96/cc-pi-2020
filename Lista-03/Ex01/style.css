@@ -1,0 +1,115 @@
+* {
+    box-sizing: border-box
+}
+
+body {
+    font-size: 20px;
+    max-width: 1200px;
+    margin: auto;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+.container {
+    display: grid;
+    grid-template-columns: 1fr 4fr;
+    grid-template-rows: auto auto auto;
+    grid-gap: 20px 30px;
+    padding: 10px;
+}
+
+div[class^="item"] {
+    border-radius: 10px;
+}
+
+.item1 {
+    grid-column: 1;
+    grid-row: 1 / 3;
+    background-color: #c0c0c04d;
+    border: 1px solid silver;
+    text-align: left;
+    align-self: flex-start;
+    padding: 10px 0;
+}
+
+.menu-titulo {
+    color: gray;
+    font-size: medium;
+    font-weight: bold;
+    padding-left: 15px;
+}
+
+.menu-link {
+    color: #2867b2;
+    text-decoration: none;
+    display: block;
+    width: 100%;
+    padding-left: 15px;
+}
+
+.menu-link:hover {
+    color: white;
+    background-color: #2867b2;
+    cursor: pointer;
+}
+
+.item2 {
+    grid-column: 2;
+    background-color: #c0c0c04d;
+    border: 1px solid silver;
+    text-align: left;
+    padding: 50px;
+}
+
+.botao-grande {
+    color: white;
+    background-color: #2867b2;
+    border: 1px solid #2867b2;
+    font-size: 20px;
+    border-radius: 5px;
+    padding: 8px 20px;
+    transition-duration: 300ms;
+}
+
+.botao-grande:hover {
+    background-color: #00539b;
+    border: 1px solid #00539b;
+    cursor: pointer;
+}
+
+.item3 {
+    grid-column: 2;
+    display: grid;
+    grid-gap: 10px;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+}
+
+.item3sub {
+    border-radius: 10px;
+    /*border: 1px solid silver;/* Para visualização */
+    text-align: left;
+}
+
+.botao-pequeno {
+    background-color: #c0c0c04d;
+    border: 1px solid silver;
+    font-size: 15px;
+    border-radius: 5px;
+    padding: 8px 20px;
+    transition-duration: 300ms;
+}
+
+.botao-pequeno:hover {
+    background-color: #c0c0c099;
+    cursor: pointer;
+}
+
+.footer {
+    /*border: 1px solid silver;/* Para visualização */
+    border-top: 1px solid silver;
+    font-size: medium;
+    grid-column: 1 / 3;
+    grid-row: 4;
+    text-align: left;
+    padding: 16px;
+}

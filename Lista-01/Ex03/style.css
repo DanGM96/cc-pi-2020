@@ -1,0 +1,37 @@
+.borda {
+    border: 3px solid black;
+    min-height: 380px;
+}
+
+h1, h3 {
+    text-align: center;
+}
+
+p {
+    padding: 10px;
+}
+
+.fonte-geral {
+    font-family: Arial;
+    font-size: 20px;
+}
+
+.justificado {
+    text-align: justify;
+}
+
+.centralizado {
+    text-align: center;
+}
+
+.botao-esq {
+    position: absolute;
+    top: 40%;
+    left: 2%;
+}
+
+.botao-dir {
+    position: absolute;
+    top: 40%;
+    right: 2%;
+}

@@ -1,0 +1,28 @@
+body {
+    text-align: center;
+}
+
+td {
+    text-align: left;
+}
+
+.alin-esq {
+    text-align: left;
+}
+
+table {
+    width: 400px;
+    margin: 0 auto;
+}
+
+.circulos {
+    list-style-type: circle;
+}
+
+.romanos {
+    list-style-type: upper-roman;
+}
+
+.alfabeto {
+    list-style-type: lower-alpha;
+}
