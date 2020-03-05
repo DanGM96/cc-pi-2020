@@ -1,0 +1,36 @@
+* {
+    box-sizing: border-box;
+}
+
+.grid {
+    display: grid;
+    justify-content: center;
+}
+
+.formulario {
+    border: 1px solid gray;
+    text-align: center;
+    font-family: fantasy;
+}
+
+input[type=text], input[type=email], textarea {
+    width: 80%;
+    padding: 5px 10px;
+    border: 1px solid lightgray;
+    font-size: medium;
+    resize: none;
+}
+
+input[type=submit] {
+    cursor: pointer;
+}
+
+.checktext {
+    font-size: x-small;
+}
+
+/*
+input[type=submit]{
+    
+}
+*/
