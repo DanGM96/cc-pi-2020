@@ -1,0 +1,65 @@
+* {
+    box-sizing: border-box;
+}
+
+.container {
+    display: grid;
+    justify-content: center;
+    margin: 0 auto;
+}
+
+form {
+    border: 2px solid #039403;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    padding: 20px;
+}
+
+.titulo {
+    font-size: 30px;
+    color: gray;
+    padding: 0;
+    margin: 0;
+}
+
+.subtitulo {
+    font-size: 15px;
+    color: gray;
+}
+
+p {
+    align-self: center;
+}
+
+p>* {
+    width: 350px;
+    height: 40px;
+    padding: 13px;
+    border: 1px solid gray;
+    font-size: 14px;
+    resize: none;
+}
+
+p>*::placeholder {
+    color: gray;
+}
+
+textarea {
+    height: 120px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+input[type=submit] {
+    width: 350px;
+    height: 40px;
+    color: white;
+    background-color: green;
+    border: 0;
+    font-weight: bold;
+    font-size: 15px;
+    padding: 10px;
+}
+
+input[type=submit]:hover {
+    cursor: pointer;
+    background-color: #039403;
+}
