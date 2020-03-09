@@ -1,33 +1,49 @@
 * {
     box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    border: none;
 }
 
 .container {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     display: grid;
     justify-content: center;
-    margin: 0 auto;
 }
 
 .titulo {
     font-size: 25px;
     padding: 5px 0;
-    margin: 0;
 }
+
+/* Formulário */
 
 form {
     border-top: 1px solid lightgray;
     width: 400px;
     font-size: 14px;
+    padding-top: 11px;
 }
+
+/* Tudo dentro do Formulário */
 
 form * {
     border-radius: 5px;
 }
 
+/* Todos os SPANs dentro do Formulário */
+
 form span {
+    display: inline-block;
     font-weight: bold;
+    width: 23%;
+    height: 40px;
+    margin: 0;
+    text-align: right;
+    padding-right: 10px;
 }
+
+/* Todos os INPUTs dentro do Formulário */
 
 form input {
     border: 1px solid darkgray;
@@ -35,22 +51,25 @@ form input {
     padding: 13px;
 }
 
+/* Caixas maiores */
+
 .big-input {
-    width: 300px;
+    width: 75%;
 }
+
+/* Caixas menores */
 
 .small-input {
-    width: 100px;
+    width: 25%;
 }
 
-/* Input NUMBER: Chrome, Safari, Edge, Opera */
+/* Removendo os botoes do Input NUMBER: Chrome, Safari, Edge, Opera */
 
 input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
     -webkit-appearance: none;
-    margin: 0;
 }
 
-/* Input NUMBER: Firefox */
+/* Removendo os botoes do Input NUMBER: Firefox */
 
 input[type=number] {
     -moz-appearance: textfield;
@@ -60,9 +79,13 @@ p {
     align-self: center;
 }
 
+/* Todos os placeholders dentro de P */
+
 p>*::placeholder {
     color: gray;
 }
+
+/* Botão Cancelar */
 
 button {
     height: 40px;
@@ -79,12 +102,15 @@ button:hover {
     background-color: #eeeeee;
 }
 
+/* Botão Salvar */
+
 input[type=submit] {
     color: white;
     background-color: dodgerblue;
     border: 0;
     font-weight: bold;
-    margin: 0 2px;
+    margin-left: 2px;
+    margin-right: 3px;
     padding: 10px;
     float: right;
 }
