@@ -51,6 +51,10 @@ form input {
     padding: 13px;
 }
 
+form input:focus {
+    border: 1px solid dodgerblue;
+}
+
 /* Caixas maiores */
 
 .big-input {
