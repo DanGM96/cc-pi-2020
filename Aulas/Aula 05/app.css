@@ -1,0 +1,23 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    text-align: center;
+}
+
+#p7 {
+    height: 100px;
+}
+
+#div1 {
+    background-color: brown;
+    color: white;
+    width: 150px;
+    margin: 0 auto;
+    padding: 5px;
+}
+
+#div1:hover {
+    cursor: pointer;
+}
