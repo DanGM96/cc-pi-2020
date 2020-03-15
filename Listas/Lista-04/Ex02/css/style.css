@@ -1,0 +1,61 @@
+:root {
+    --font-family: 'Open Sans', sans-serif;
+    --text-primary: #b6b6b6;
+    --text-primary-opaque: #b6b6b633;
+    --text-secondary: #ececec;
+    --bg-primary: #23232e;
+    --bg-secondary: #141418;
+    --accent-color: #6649b8;
+    --transition-speed: 600ms;
+    font-size: 16px;
+    font-family: var(--font-family);
+}
+
+body {
+    color: var(--text-primary);
+    margin: 0;
+    padding: 0;
+    background-color: var(--bg-secondary);
+}
+
+/* https://leaverou.github.io/css3patterns/#starry-night */
+
+#stars-background {
+    background-size: cover;
+    background-color: black;
+    background-image: radial-gradient(white, rgba(255, 255, 255, .2) 2px, transparent 40px), radial-gradient(white, rgba(255, 255, 255, .15) 1px, transparent 30px), radial-gradient(white, rgba(255, 255, 255, .1) 2px, transparent 40px), radial-gradient(rgba(255, 255, 255, .4), rgba(255, 255, 255, .1) 2px, transparent 30px);
+    background-size: 550px 550px, 350px 350px, 250px 250px, 150px 150px;
+    background-position: 0 0, 40px 60px, 130px 270px, 70px 100px;
+}
+
+main * {
+    box-sizing: border-box;
+}
+
+main {
+    margin-left: 5rem;
+    padding: 1rem;
+}
+
+.container {
+    float: inline-start;
+    border-top: 1px solid var(--text-primary-opaque);
+    width: 100%;
+}
+
+img {
+    border: 1px solid var(--text-primary);
+    width: 200px;
+    margin-bottom: 1rem;
+    height: auto;
+}
+
+.img-right {
+    float: right;
+    margin-left: 1rem;
+}
+
+.img-left {
+    float: left;
+    margin-right: 1rem;
+}
