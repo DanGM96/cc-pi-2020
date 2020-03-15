@@ -1,42 +1,19 @@
-:root {
-    font-size: 16px;
-    font-family: 'Open Sans', sans-serif;
-    --text-primary: #b6b6b6;
-    --text-secondary: #ececec;
-    --bg-primary: #23232e;
-    --bg-secondary: #141418;
-    --scroll-color: #6649b8;
-    --transition-speed: 600ms;
-}
-
-body {
-    color: black;
-    background-color: white;
-    margin: 0;
-    padding: 0;
-}
-
-main {
-    margin-left: 5rem;
-    padding: 1rem;
-}
-
 .navbar {
     position: fixed;
     background-color: var(--bg-primary);
     transition: width var(--transition-speed) ease;
-    overflow: scroll;
 }
 
-/* Firefox Scroll */
+/* Firefox Scrollbar */
 
-.scroller {
-    overflow-y: scroll;
-    scrollbar-color: var(--scroll-color) var(--bg-primary);
+.scrollbar {
+    overflow-x: scroll;
+    overflow-y: auto;
+    scrollbar-color: var(--accent-color) var(--bg-primary);
     scrollbar-width: thin;
 }
 
-/* Chormium Scroll INÍCIO */
+/* Chromium and Safari Scrollbar INÍCIO */
 
 .navbar::-webkit-scrollbar {
     width: 0.25rem;
@@ -48,14 +25,14 @@ main {
 }
 
 .navbar::-webkit-scrollbar-thumb {
-    background: var(--scroll-color);
+    background: var(--accent-color);
 }
 
 .navbar::-webkit-scrollbar-corner {
     background-color: var(--bg-primary);
 }
 
-/* Chormium Scroll FIM */
+/* Chromium and Safari Scroll FIM */
 
 .navbar-nav {
     list-style: none;
@@ -101,7 +78,7 @@ main {
 }
 
 .fa-color {
-    color: #11ee00;
+    color: var(--accent-color);
     transition: var(--transition-speed);
 }
 
@@ -127,22 +104,21 @@ main {
 /* Mobile (telas pequenas) */
 
 @media only screen and (max-width: 600px) {
+    main {
+        margin: 0;
+    }
     .navbar {
         bottom: 0;
         width: 100vw;
         height: 5rem;
+    }
+    .scrollbar {
+        overflow-y: hidden;
     }
     .navbar-nav {
         flex-direction: row;
     }
     .nav-link {
         justify-content: center;
-        height: 100%;
-    }
-    main {
-        margin: 0;
-    }
-    .nav-link svg {
-        margin: 0 0.5rem;
     }
 }
