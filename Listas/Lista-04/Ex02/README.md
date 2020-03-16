@@ -1,6 +1,6 @@
 # Instructions
 
-You'll need to run this files on a server for the `html/menu.html` to load. That's due to `js/include.js` using a XMLHttpRequest.
+You'll need to run this files on a server for the `menu.html` to load. That's due to `js/include.js` using a XMLHttpRequest.
 
 ## Recommended VS Code Extension
 
