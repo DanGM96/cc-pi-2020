@@ -2,10 +2,6 @@
     box-sizing: border-box;
 }
 
-body {
-    background-color: papayawhip;
-}
-
 .container {
     display: grid;
     grid-template-rows: auto auto auto;
