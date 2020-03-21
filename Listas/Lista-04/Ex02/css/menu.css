@@ -82,6 +82,10 @@
     transition: var(--transition-speed);
 }
 
+#btnControl {
+    display: none;
+}
+
 /* Computadores (telas grandes) */
 
 @media only screen and (min-width: 600px) {
@@ -95,6 +99,12 @@
     }
     .navbar:hover .link-text {
         display: inline;
+    }
+    .navbar:target {
+        width: 5rem;
+    }
+    .navbar:target .link-text {
+        display: none;
     }
     .nav-item:last-child {
         margin-top: auto;
