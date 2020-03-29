@@ -63,6 +63,10 @@ img {
     margin-right: 1rem;
 }
 
+ul {
+    list-style: disc;
+}
+
 /* ::::::Menu:::::: */
 
 .navbar {
