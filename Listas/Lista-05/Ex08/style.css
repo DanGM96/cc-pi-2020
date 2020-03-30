@@ -1,0 +1,23 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 5rem;
+}
+
+h3, p {
+    text-align: center;
+}
+
+table {
+    min-width: 50%;
+    margin: auto;
+}
+
+table, th, td {
+    text-align: center;
+    padding: 5px;
+    border-collapse: collapse;
+    border: 1px solid gray;
+}
