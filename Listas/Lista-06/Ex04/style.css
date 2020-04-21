@@ -1,0 +1,45 @@
+* {
+	box-sizing: border-box;
+}
+
+body {
+	margin: 2rem 4rem;
+	padding-top: 10%;
+	overflow-y: scroll;
+	background-color: #f5f5dd;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+}
+
+span {
+	margin: 0.5rem;
+}
+
+input[type="button"] {
+	background-color: white;
+	border: 1px solid #7a7a7a;
+	padding: 2px;
+	width: 4rem;
+	cursor: pointer;
+	transition: 200ms;
+}
+
+input[type="button"]:active {
+	background-color: lightgray;
+}
+
+#resetBtn {
+	border-top-left-radius: 6px;
+	border-bottom-left-radius: 6px;
+}
+
+#inputNum {
+	width: 4rem;
+}
+
+#inputBtn {
+	border-top-right-radius: 6px;
+	border-bottom-right-radius: 6px;
+}
