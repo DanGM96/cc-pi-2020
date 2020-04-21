@@ -1,0 +1,46 @@
+* {
+	box-sizing: border-box;
+}
+
+body {
+	margin: 2rem 4rem;
+	overflow-y: scroll;
+	font-family: monospace;
+	font-size: large;
+}
+
+ul {
+	float: right;
+	list-style: square;
+}
+
+li {
+	cursor: pointer;
+	user-select: none;
+}
+
+div {
+	float: right;
+	display: none;
+	padding: 1rem;
+}
+
+p {
+	text-align: justify;
+}
+
+#one {
+	background-color: firebrick;
+}
+
+#two {
+	background-color: dodgerblue;
+}
+
+#three {
+	background-color: gold;
+}
+
+#four {
+	background-color: green;
+}
