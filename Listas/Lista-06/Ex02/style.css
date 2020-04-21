@@ -1,0 +1,27 @@
+* {
+	box-sizing: border-box;
+}
+
+body {
+	margin: 2rem 4rem;
+	overflow-y: scroll;
+	font-family: fantasy;
+}
+
+ul {
+	float: left;
+	list-style: circle;
+}
+
+span {
+	float: right;
+}
+
+i {
+	padding: 0 1rem;
+	cursor: pointer;
+}
+
+i:hover {
+	color: red;
+}
