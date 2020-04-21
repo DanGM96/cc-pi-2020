@@ -1,0 +1,59 @@
+* {
+	box-sizing: border-box;
+	font-family: fantasy;
+	font-size: 16px;
+}
+
+body {
+	margin: 2rem 4rem;
+	overflow-y: scroll;
+	background-color: #f5deb3;
+}
+
+#titleArea {
+	background-color: #daa520;
+}
+
+#inputArea {
+	background-color: #d3d3d3;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+input {
+	background-color: #d3d3d3;
+	border: none;
+	padding: 0 0.5rem;
+	flex-grow: 1;
+}
+
+i {
+	padding: 0 0.5rem;
+	cursor: pointer;
+	color: #000a;
+}
+
+i:hover {
+	color: black;
+}
+
+table {
+	border-collapse: collapse;
+	margin: auto;
+}
+
+th,
+td {
+	padding: 0.5rem;
+	height: 2.5rem;
+}
+
+tbody {
+	background-image: repeating-linear-gradient(
+		white,
+		white 2.5em,
+		#d3d3d3 2.5em,
+		#d3d3d3 5em
+	);
+}
