@@ -1,36 +1,57 @@
 // L04Ex05
 
-const textId = ["company", "name", "function"];
+// Informações necessárias do HTML
+const info = {
+	company: {
+		id: "company",
+		defaulText: "Nome da empresa",
+		parentClass: "companyArea",
+	},
+	name: {
+		id: "name",
+		defaulText: "Nome",
+		parentClass: "nameArea",
+	},
+	function: {
+		id: "function",
+		defaulText: "Função do funcionário",
+		parentClass: "functionArea",
+	},
+};
 
-function getAreaText(node) {
-	if (node.className === "companyArea") {
-		return "Nome da empresa";
-	} else if (node.className === "nameArea") {
-		return "Nome";
-	} else if (node.className === "functionArea") {
-		return "Função do funcionário";
-	}
+// Procura e entrega o defaultText
+function getDefaultText(node) {
+	let defaultText;
+	// some() para no instante em que encontra um TRUE
+	Object.keys(info).some((key) => {
+		if (node.className === info[key].parentClass) {
+			defaultText = info[key].defaulText;
+		}
+	});
+	return defaultText;
 }
 
+// Cria a inputBox, onde o usuário pode editar o texto
 function createInputBox(currentNode) {
 	let node = document.createElement("input");
 	let nodeParent = currentNode.parentNode;
 	let boxText = currentNode.innerHTML;
 	let placeholder;
 	let value = "";
-
 	if (
-		boxText !== "Nome da empresa" &&
-		boxText !== "Nome" &&
-		boxText !== "Função do funcionário"
+		// Verifica se TUDO é true no objeto
+		// every() para no instante que encontra um FALSE
+		Object.keys(info).every((key) => {
+			return boxText !== info[key].defaulText;
+		})
 	) {
-		placeholder = getAreaText(currentNode.parentNode);
+		placeholder = getDefaultText(nodeParent);
 		value = boxText;
 	} else {
 		placeholder = boxText;
 	}
 
-	node.id = "inputBox";
+	node.id = currentNode.id + "Input";
 	node.type = "text";
 	node.placeholder = placeholder;
 	node.value = value;
@@ -47,27 +68,30 @@ function createInputBox(currentNode) {
 	return node;
 }
 
-function createIcon(iconName) {
+// Criar qualquer icone ao receber a classe completa
+function createIcon(iconClass) {
 	let node = document.createElement("i");
-	node.className = iconName;
+	node.className = iconClass;
 	return node;
 }
 
-function endEdit(nodeParent, storedNode) {
+// Remove a inputBox e coloca o texto no lugar
+function endEdit(nodeParent, node) {
 	nodeParent.innerHTML = "";
-
-	nodeParent.appendChild(storedNode);
+	nodeParent.appendChild(node);
 }
 
-function confirmEdit(nodeParent, storedNode) {
-	let text = document.getElementById("inputBox").value;
+// Organiza o texto a substituir a inputBox
+function confirmEdit(nodeParent, node) {
+	let text = nodeParent.firstChild.value.trim();
 	if (text === "") {
-		text = getAreaText(nodeParent);
+		text = getDefaultText(nodeParent);
 	}
-	storedNode.innerHTML = text;
-	endEdit(nodeParent, storedNode);
+	node.innerHTML = text;
+	endEdit(nodeParent, node);
 }
 
+// Remove o texto, gera a inputBox e os ícones como botões
 function textInput(node) {
 	let nodeParent = node.parentNode;
 
@@ -90,16 +114,25 @@ function textInput(node) {
 	nodeParent.firstChild.focus();
 }
 
-textId.forEach((id) => {
-	document.getElementById(id).onclick = function () {
+document.getElementById("logo").onclick = function () {
+	if (confirm("Confira nossos pacotes!")) {
+		open("https://youtu.be/dQw4w9WgXcQ");
+	}
+};
+
+// Aguarda por cliques nos elementos predeterminados
+Object.keys(info).forEach((key) => {
+	document.getElementById(info[key].id).onclick = function () {
 		textInput(this);
 	};
 });
 
-document.getElementById("logo").onclick = function () {
-	alert("Confira nossos pacotes!");
+// Aguar por clica na imagem
+document.getElementById("picture").onclick = function () {
+	document.getElementById("file").click();
 };
 
-document.getElementById("picture").onclick = function () {
-	// Loadimg
+// Troca a imagem pela escolhida pelo usuário
+document.getElementById("file").onchange = function () {
+	document.getElementById("picture").src = URL.createObjectURL(this.files[0]);
 };

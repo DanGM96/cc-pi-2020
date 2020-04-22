@@ -49,6 +49,7 @@ body {
 .logoArea {
 	padding-top: 1rem;
 	padding-bottom: 0.2rem;
+	font-weight: bold;
 }
 
 .companyArea,
@@ -56,9 +57,24 @@ body {
 	line-height: 1.3rem;
 }
 
+.pictureArea {
+	margin-top: 5.3rem;
+	position: relative;
+}
+
 #picture {
-	margin: 0.5rem;
-	height: 9rem;
+	position: absolute;
+	margin: auto;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	max-height: 9rem;
+	max-width: 9rem;
+}
+
+#file {
+	display: none;
 }
 
 .botton {
@@ -81,14 +97,14 @@ body {
 	font-size: 0.8rem;
 }
 
-#inputBox {
+[id$="Input"][type="text"] {
 	border: none;
 	border-bottom: 1px solid #b1b5ba;
 	width: 11rem;
 	height: 1rem;
 }
 
-.botton #inputBox {
+.botton [id$="Input"][type="text"] {
 	color: white;
 	background-color: #27292b;
 }
