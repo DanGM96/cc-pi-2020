@@ -54,6 +54,7 @@ function enterText() {
 	}
 	if (tries === 5) {
 		document.getElementById("mainTxt").innerHTML = "Acabaram suas tentativas!";
+		document.getElementById("inputBtn").disabled = true;
 	}
 }
 
@@ -72,4 +73,5 @@ document.getElementById("inputNum").onkeypress = function () {
 // Reinicia o jogo
 document.getElementById("resetBtn").onclick = function () {
 	startGame();
+	document.getElementById("inputBtn").disabled = false;
 };

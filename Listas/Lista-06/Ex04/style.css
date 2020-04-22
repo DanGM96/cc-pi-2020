@@ -22,11 +22,14 @@ input[type="button"] {
 	border: 1px solid #7a7a7a;
 	padding: 2px;
 	width: 4rem;
-	cursor: pointer;
 	transition: 200ms;
 }
 
-input[type="button"]:active {
+input[type="button"]:hover:enabled {
+	cursor: pointer;
+}
+
+input[type="button"]:active:enabled {
 	background-color: lightgray;
 }
 

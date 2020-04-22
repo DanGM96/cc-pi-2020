@@ -47,11 +47,13 @@ function getContent() {
 
 // Coloca o elemento na tela
 function enterText() {
-	if (document.getElementById("inputTxt").value !== "") {
+	let inputTxt = document.getElementById("inputTxt");
+	if (inputTxt.value !== "") {
 		let node = document.createElement("tr");
 		node.appendChild(getContent());
 		document.getElementById("list").appendChild(node);
 	}
+	inputTxt.value = "";
 }
 
 // Ao clicar no ícone
