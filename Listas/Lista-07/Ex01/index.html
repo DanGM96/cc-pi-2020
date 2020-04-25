@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="style.css">
+    <title></title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="formArea">
+            <h2>Contact Form</h1>
+                <form action="" onsubmit="return false">
+                    <p><input id="name" type="text"placeholder="Name" required></p>
+                    <p><input id="email" type="email" placeholder="Email" required></p>
+                    <p><textarea id="message" placeholder="Message" required></textarea></p>
+                    <label class="check">
+                        <input id="checked" type="checkbox">
+                        <span class="checkmark"></span>
+                        <span class="checktext">Send a copy to my email address</span>
+                    </label>
+                    <p><input id="sendBtn" type="submit" value="SEND"></p>
+                </form>
+
+        </div>
+    </div>
+    <div id="sentJson"></div>
+    <script src="scripts.js"></script>
+</body>
+
+</html>
