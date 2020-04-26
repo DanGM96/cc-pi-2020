@@ -1,0 +1,52 @@
+* {
+	font-family: sans-serif;
+	box-sizing: border-box;
+}
+
+body {
+	margin: 0;
+	box-sizing: border-box;
+	background-color: #fff;
+	overflow-y: scroll;
+}
+
+header {
+	padding: 0.8rem;
+	color: #fff;
+	background-color: #252525;
+	font-weight: bold;
+}
+
+span {
+	margin: 1rem;
+}
+
+.container {
+	margin: 1rem 0;
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(22rem, 1fr));
+}
+
+.card {
+	margin: 1rem;
+}
+
+img {
+	max-width: 100%;
+}
+
+img:hover,
+p:hover {
+	cursor: pointer;
+	opacity: 0.8;
+}
+
+p {
+	margin: 0.8rem 0;
+	font-weight: 600;
+	color: #030303;
+}
+
+label {
+	color: #606060;
+}
