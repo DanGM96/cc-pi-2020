@@ -11,56 +11,78 @@
 		></script>
 	</head>
 	<body>
-		<div class="gameBoy">
-			<div class="sprite">
-				<img
-					id="pokeSprite"
-					src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/0.png"
-					alt=""
-				/>
-				<div id="spriteName">img_info</div>
+		<div class="container">
+			<div class="leftTab">
+				<span class="leftTitle">List</span>
 			</div>
-			<div class="buttons">
-				<i
-					id="prevPoke"
-					class="fas fa-chevron-left fa-2x"
-					title="Previous Pokémon"
-				></i>
-				<i
-					id="nextSprite"
-					class="fas fa-chevron-up fa-2x"
-					title="Next Image"
-				></i>
-				<i
-					id="nextPoke"
-					class="fas fa-chevron-right fa-2x"
-					title="Next Pokémon"
-				></i>
-				<i
-					id="prevSprite"
-					class="fas fa-chevron-down fa-2x"
-					title="Previous Image"
-				></i>
+
+			<div class="gameBoy">
+				<div class="sprite">
+					<img
+						id="pokeSprite"
+						src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/0.png"
+						alt=""
+					/>
+					<div id="spriteName">img_info</div>
+				</div>
+				<div class="buttons">
+					<i
+						id="prevPoke"
+						class="fas fa-chevron-left fa-2x"
+						title="Previous Pokémon"
+					></i>
+					<i
+						id="nextSprite"
+						class="fas fa-chevron-up fa-2x"
+						title="Next Image"
+					></i>
+					<i
+						id="nextPoke"
+						class="fas fa-chevron-right fa-2x"
+						title="Next Pokémon"
+					></i>
+					<i
+						id="prevSprite"
+						class="fas fa-chevron-down fa-2x"
+						title="Previous Image"
+					></i>
+				</div>
+				<div class="info">
+					<div id="pokeName">Pokémon</div>
+					<div id="pokeId">ID</div>
+					<div id="pokeType">Type</div>
+				</div>
+				<div class="input">
+					<input
+						type="text"
+						id="pokeInput"
+						title="Type a number or name"
+						placeholder="Battle"
+					/>
+					<input
+						type="button"
+						value="Catch"
+						id="pokeBtn"
+						title="Search Pokémons"
+					/>
+					<div id="pokeWrong">Pokémon não encontrado</div>
+				</div>
 			</div>
-			<div class="info">
-				<div id="pokeName">Pokémon</div>
-				<div id="pokeId">ID</div>
-				<div id="pokeType">Type</div>
-			</div>
-			<div class="input">
-				<input
-					type="text"
-					id="pokeInput"
-					title="Type a number or name"
-					placeholder="Battle"
-				/>
-				<input
-					type="button"
-					value="Catch"
-					id="pokeBtn"
-					title="Search Pokémons"
-				/>
-				<div id="pokeWrong">Pokémon não encontrado</div>
+
+			<div class="rightTab">
+				<span class="rightTitle">Info</span>
+				<div class="rightContent">
+					<div id="hp">HP:</div>
+					<div id="attack">Attack:</div>
+					<div id="defense">Defense:</div>
+					<br />
+					<div id="speed">Speed:</div>
+					<div id="special-atk">Special Atk:</div>
+					<div id="special-def">Special Def:</div>
+					<br />
+					<div id="weight">Weight:</div>
+					<div id="height">Height:</div>
+				</div>
 			</div>
 		</div>
 		<script src="scripts.js"></script>

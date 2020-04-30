@@ -1,7 +1,7 @@
 let currentPokemon; // Guarda o pokémon atual
 let currentSprite = 4; // Guarda a chave do sprite (padrão = 4)
 let pokeList; // Guarda a lista de todos os pokémons
-let currentIndex = -1;
+let currentIndex = -1; // Index inicial da lista
 
 // Tenta pegar a lista no cache, caso não tenha, a cria
 try {
@@ -75,9 +75,20 @@ function fillGameBoy() {
 		types += firstUp(poke.types[i].type.name) + "<br>";
 	});
 
+	// Main Info
 	doc("pokeName").innerHTML = name;
 	doc("pokeId").innerHTML = "#" + poke.id;
 	doc("pokeType").innerHTML = types;
+
+	// Extra Info
+	doc("hp").innerHTML = "HP: " + poke.stats[5].base_stat;
+	doc("attack").innerHTML = "Attack: " + poke.stats[4].base_stat;
+	doc("defense").innerHTML = "Defense: " + poke.stats[3].base_stat;
+	doc("speed").innerHTML = "Speed: " + poke.stats[0].base_stat;
+	doc("special-atk").innerHTML = "Special Atk: " + poke.stats[2].base_stat;
+	doc("special-def").innerHTML = "Special Def: " + poke.stats[1].base_stat;
+	doc("weight").innerHTML = "Weight: " + poke.weight / 10 + "kg";
+	doc("height").innerHTML = "Height: " + poke.height * 10 + "cm";
 }
 
 // Procura pelo pokemon na API
@@ -104,14 +115,15 @@ function getPokemon(url) {
 		});
 }
 
+// Cria um link pra pesquisa na API
 doc("pokeBtn").onclick = () => {
-	let input = doc("pokeInput").value.trim().toLowerCase();
+	let input = doc("pokeInput").value.replace(/\./g, "").trim().toLowerCase();
+
 	if (input !== "" && input != null) {
 		let url = `https://pokeapi.co/api/v2/pokemon/${input}/`;
 		getPokemon(url);
-	} else {
-		input.value = input;
 	}
+	doc("pokeInput").value = input;
 };
 
 doc("pokeInput").onkeypress = () => {
@@ -155,6 +167,7 @@ doc("prevSprite").onclick = () => {
 
 document.onkeydown = () => {
 	if (document.activeElement === doc("pokeInput")) {
+		// Se o pokeInput estiver ativo, não ativa as outras funções
 		return;
 	}
 	if (event.keyCode === 37) {

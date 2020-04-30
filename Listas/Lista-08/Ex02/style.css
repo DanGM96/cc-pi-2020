@@ -1,33 +1,153 @@
+/* # Preparações iniciais */
 * {
 	box-sizing: border-box;
 	font-family: fantasy;
 	--poke-yellow: #feca1b;
 	--poke-blue: #3761a8;
+	--side-transition: 0.4s;
+	--content-transition: 2s;
+	margin: 0;
+	padding: 0;
 }
 
-html {
-	height: 100%;
-	overflow-y: scroll;
-	text-align: center;
-}
-
-.fas {
-	color: #3761a8;
-	cursor: pointer;
-}
-
-.gameBoy {
+.container {
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr;
 	margin: 5% auto;
+	width: 45rem;
+	height: 22rem;
+	position: relative;
+}
+
+.leftTab,
+.rightTab,
+.gameBoy {
+	grid-row: 1;
+	background-color: var(--poke-yellow);
+	border: 0.5rem solid var(--poke-blue);
+	margin: 0;
+	padding: 0;
+}
+
+/* # Ambas Abas */
+.leftTitle,
+.rightTitle {
+	text-align: center;
+	font-weight: 600;
+	display: block;
+}
+
+.leftTab:hover .leftTitle,
+.rightTab:hover .rightTitle {
+	animation: var(--content-transition) HoverFadeIn;
+}
+
+@keyframes HoverFadeIn {
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
+	}
+}
+
+.leftTab .leftTitle,
+.rightTab .rightTitle {
+	animation: var(--content-transition) TitleFadeIn;
+}
+
+@keyframes TitleFadeIn {
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
+	}
+}
+
+.rightContent,
+.leftContent {
+	margin-top: 1rem;
+	text-align: justify;
+	display: none;
+	animation: var(--content-transition) ContentFadeIn;
+}
+
+@keyframes ContentFadeIn {
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
+	}
+}
+
+/* ## Aba Esquerda */
+.leftTab {
+	grid-column: 1;
+	position: absolute;
+	top: 1.5rem;
+	border-right: unset;
+	border-top-left-radius: 1rem;
+	border-bottom-left-radius: 1rem;
+	transition: var(--side-transition);
+
+	padding: 0 0.3rem;
+	width: 2rem;
+	height: 5rem;
+	left: 13rem;
+	writing-mode: sideways-lr;
+}
+
+.leftTab:hover {
+	padding: 1rem;
+	width: 12rem;
+	height: 19rem;
+	left: 3rem;
+	writing-mode: unset;
+}
+
+/* ## Aba Direita */
+.rightTab {
+	grid-column: 3;
+	position: absolute;
+	top: 1.5rem;
+	border-left: unset;
+	border-top-right-radius: 1rem;
+	border-bottom-right-radius: 1rem;
+	transition: var(--side-transition);
+
+	padding: 0 0.3rem;
+	width: 2rem;
+	height: 5rem;
+	right: 13rem;
+	writing-mode: sideways-rl;
+}
+
+.rightTab:hover {
+	padding: 1rem;
+	width: 12rem;
+	height: 19rem;
+	right: 3rem;
+	writing-mode: unset;
+}
+
+.rightTab:hover .rightContent {
+	display: block;
+}
+
+/* ## GameBoy - Conteúdo Central */
+.gameBoy {
+	grid-column: 2;
 	display: grid;
 	grid-template-columns: 1fr 1fr;
 	grid-template-rows: 1fr 2fr 1fr;
 	width: 15rem;
 	height: 22rem;
-	background-color: var(--poke-yellow);
-	border: 0.5rem solid var(--poke-blue);
 	border-radius: 1rem;
 }
 
+/* ### Imagem */
 .sprite {
 	grid-row: 1;
 	grid-column: 1 / span 2;
@@ -35,11 +155,19 @@ html {
 	margin: 1rem;
 	border-radius: 1rem;
 	border: 0.5rem solid var(--poke-blue);
+	overflow: hidden;
+	height: 8.4rem;
+	text-align: center;
 }
 
 #pokeSprite {
 	width: 96px;
 	height: 96px;
+	transition: transform 0.5s ease;
+}
+
+img:hover {
+	transform: scale(2);
 }
 
 #spriteName {
@@ -48,6 +176,7 @@ html {
 	padding: 0.1rem 0.5rem;
 }
 
+/* ### Navegação - Setas */
 .buttons {
 	grid-row: 2;
 	grid-column: 1;
@@ -55,20 +184,25 @@ html {
 	position: relative;
 }
 
-.buttons i:active {
-	color: #c52018;
+.buttons i {
+	color: #3761a8;
+	cursor: pointer;
 }
 
-#nextSprite {
-	position: absolute;
-	top: 0.8rem;
-	left: 2.5rem;
+.buttons i:active {
+	color: #c52018;
 }
 
 #prevPoke {
 	position: absolute;
 	top: 2.5rem;
 	left: 1rem;
+}
+
+#nextSprite {
+	position: absolute;
+	top: 0.8rem;
+	left: 2.5rem;
 }
 
 #nextPoke {
@@ -79,14 +213,14 @@ html {
 
 #prevSprite {
 	position: absolute;
-	bottom: 0.8rem;
+	top: 4.2rem;
 	left: 2.5rem;
 }
 
+/* ### Nome/ID/Tipo - Texto Princial */
 .info {
 	grid-row: 2;
 	grid-column: 2;
-	padding-left: 0.5rem;
 	padding-right: 1rem;
 	text-align: right;
 	display: flex;
@@ -102,8 +236,9 @@ html {
 	font-style: italic;
 }
 
+/* ### Pesquisa */
 .input {
-	margin: 1rem;
+	margin: 1rem auto;
 	grid-row: 3;
 	grid-column: 1 / span 2;
 	position: relative;
@@ -112,15 +247,12 @@ html {
 #pokeInput,
 #pokeBtn {
 	padding: 0 5px;
-	width: 3rem;
+	width: 3.5rem;
 	height: 1.2rem;
 	background-color: var(--poke-blue);
 	color: white;
 	border: none;
 	border-radius: 0.5rem;
-}
-
-#pokeInput::placeholder {
 	text-align: center;
 }
 
