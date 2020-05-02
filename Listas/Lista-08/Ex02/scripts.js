@@ -1,7 +1,7 @@
-let currentPokemon; // Guarda o pokémon atual
-let currentSprite = 4; // Guarda a chave do sprite (padrão = 4)
 let pokeList; // Guarda a lista de todos os pokémons
 let currentIndex = -1; // Index inicial da lista
+let currentPokemon; // Guarda o pokémon atual
+let currentSprite = 4; // Guarda a chave do sprite (padrão = 4)
 
 // Tenta pegar a lista no cache, caso não tenha, a cria
 try {
@@ -64,10 +64,15 @@ function fillGameBoy() {
 	// Pega o index do pokémon na lista
 	if (poke.id < pokeList.length) {
 		currentIndex = poke.id - 1;
+		doc("pokeId").title = "";
+		doc("pokeId").style.cursor = "unset";
 	} else {
 		currentIndex = pokeList.findIndex((key) => {
 			return key.name === poke.name;
 		});
+		doc("pokeId").title =
+			"Pokémon with IDs over 10000 are variations of other Pokémon";
+		doc("pokeId").style.cursor = "help";
 	}
 
 	// Pega o nome de todos os tipos do pokémon
@@ -95,12 +100,7 @@ function fillGameBoy() {
 function getPokemon(url) {
 	fetch(url)
 		.then((response) => {
-			if (response.ok) {
-				// Se houver resposta
-				doc("pokeWrong").style.display = "none";
-			} else {
-				doc("pokeWrong").style.display = "block";
-				// Se NÃO houver resposta
+			if (!response.ok) {
 				throw new Error("Request error, status " + response.status);
 			}
 			return response.json();
@@ -115,15 +115,33 @@ function getPokemon(url) {
 		});
 }
 
-// Cria um link pra pesquisa na API
-doc("pokeBtn").onclick = () => {
-	let input = doc("pokeInput").value.replace(/\./g, "").trim().toLowerCase();
-
-	if (input !== "" && input != null) {
-		let url = `https://pokeapi.co/api/v2/pokemon/${input}/`;
+// Pesquisa se há o pokemon na lista local, antes de pedir o fetch
+function searchList(key, input) {
+	let search = pokeList.find(
+		(poke) => poke[key].indexOf(input.toLowerCase()) >= 0
+	);
+	console.log(search);
+	if (search == null) {
+		doc("pokeWrong").style.display = "block";
+	} else {
+		doc("pokeWrong").style.display = "none";
+		let url = search.url;
 		getPokemon(url);
 	}
+}
+
+// Cria um link pra pesquisa na API
+doc("pokeBtn").onclick = () => {
+	let input = doc("pokeInput").value.replace(/[^a-zA-Z0-9-]+/g, "");
 	doc("pokeInput").value = input;
+
+	if (input !== "" && input != null) {
+		if (isNaN(input)) {
+			searchList("name", input);
+		} else {
+			searchList("url", input);
+		}
+	}
 };
 
 doc("pokeInput").onkeypress = () => {
@@ -165,6 +183,7 @@ doc("prevSprite").onclick = () => {
 	}
 };
 
+// Pinta o botão de vermelho
 document.onkeydown = () => {
 	if (document.activeElement === doc("pokeInput")) {
 		// Se o pokeInput estiver ativo, não ativa as outras funções
@@ -173,40 +192,81 @@ document.onkeydown = () => {
 	if (event.keyCode === 37) {
 		// ArrowLeft
 		doc("prevPoke").click();
-		doc("prevPoke").style.color = "#c52018";
+		doc("prevPoke").classList.add("btnActive");
 	}
 	if (event.keyCode === 38) {
 		// ArrowUp
 		doc("nextSprite").click();
-		doc("nextSprite").style.color = "#c52018";
+		doc("nextSprite").classList.add("btnActive");
 	}
 	if (event.keyCode === 39) {
 		// ArrowRight
 		doc("nextPoke").click();
-		doc("nextPoke").style.color = "#c52018";
+		doc("nextPoke").classList.add("btnActive");
 	}
 	if (event.keyCode === 40) {
 		// ArrowDown
 		doc("prevSprite").click();
-		doc("prevSprite").style.color = "#c52018";
+		doc("prevSprite").classList.add("btnActive");
 	}
 };
 
+// Volta a cor do botão ao normal
 document.onkeyup = () => {
+	if (document.activeElement === doc("pokeInput")) {
+		// Se o pokeInput estiver ativo, não ativa as outras funções
+		return;
+	}
 	if (event.keyCode === 37) {
 		// ArrowLeft
-		doc("prevPoke").style.color = "#3761a8";
+		doc("prevPoke").classList.remove("btnActive");
 	}
 	if (event.keyCode === 38) {
 		// ArrowUp
-		doc("nextSprite").style.color = "#3761a8";
+		doc("nextSprite").classList.remove("btnActive");
 	}
 	if (event.keyCode === 39) {
 		// ArrowRight
-		doc("nextPoke").style.color = "#3761a8";
+		doc("nextPoke").classList.remove("btnActive");
 	}
 	if (event.keyCode === 40) {
 		// ArrowDown
-		doc("prevSprite").style.color = "#3761a8";
+		doc("prevSprite").classList.remove("btnActive");
+	}
+};
+
+// Pin da aba esquerda DESATIVADO - Ative no CSS, depois retire a função do comentário
+/*
+doc("leftPin").onclick = () => {
+	let tab = doc("leftTab");
+
+	if (tab.className !== "leftBig") {
+		tab.className = "leftBig";
+		doc("leftPin").style.color = "#c52018";
+		doc("leftTitle").classList.remove("leftTitle");
+		doc("leftContent").classList.add("displayBlock");
+	} else {
+		tab.className = "leftSmall";
+		doc("leftPin").style.color = "#3761a8";
+		doc("leftTitle").classList.add("leftTitle");
+		doc("leftContent").classList.remove("displayBlock");
+	}
+};
+*/
+
+// Pin da aba direita
+doc("rightPin").onclick = () => {
+	let tab = doc("rightTab");
+
+	if (tab.className !== "rightBig") {
+		tab.className = "rightBig";
+		doc("rightPin").style.color = "#c52018";
+		doc("rightTitle").classList.remove("rightTitle");
+		doc("rightContent").classList.add("displayBlock");
+	} else {
+		tab.className = "rightSmall";
+		doc("rightPin").style.color = "#3761a8";
+		doc("rightTitle").classList.add("rightTitle");
+		doc("rightContent").classList.remove("displayBlock");
 	}
 };

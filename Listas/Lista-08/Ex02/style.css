@@ -1,13 +1,14 @@
 /* # Preparações iniciais */
 * {
-	box-sizing: border-box;
-	font-family: fantasy;
-	--poke-yellow: #feca1b;
-	--poke-blue: #3761a8;
-	--side-transition: 0.4s;
-	--content-transition: 2s;
 	margin: 0;
 	padding: 0;
+	box-sizing: border-box;
+	font-family: Arial, Helvetica, sans-serif;
+	--poke-yellow: #feca1b;
+	--poke-blue: #3761a8;
+	--poke-red: #c52018;
+	--tab-transition: 0.4s;
+	--content-transition: 1.5s;
 }
 
 .container {
@@ -17,123 +18,127 @@
 	width: 45rem;
 	height: 22rem;
 	position: relative;
+	cursor: default;
 }
 
-.leftTab,
-.rightTab,
+#leftTab,
+#rightTab,
 .gameBoy {
 	grid-row: 1;
 	background-color: var(--poke-yellow);
 	border: 0.5rem solid var(--poke-blue);
-	margin: 0;
-	padding: 0;
 }
 
-/* # Ambas Abas */
-.leftTitle,
-.rightTitle {
-	text-align: center;
-	font-weight: 600;
-	display: block;
-}
-
-.leftTab:hover .leftTitle,
-.rightTab:hover .rightTitle {
-	animation: var(--content-transition) HoverFadeIn;
-}
-
-@keyframes HoverFadeIn {
-	from {
-		opacity: 0;
-	}
-	to {
-		opacity: 1;
-	}
-}
-
-.leftTab .leftTitle,
-.rightTab .rightTitle {
-	animation: var(--content-transition) TitleFadeIn;
-}
-
-@keyframes TitleFadeIn {
-	from {
-		opacity: 0;
-	}
-	to {
-		opacity: 1;
-	}
-}
-
-.rightContent,
-.leftContent {
-	margin-top: 1rem;
-	text-align: justify;
-	display: none;
-	animation: var(--content-transition) ContentFadeIn;
-}
-
-@keyframes ContentFadeIn {
-	from {
-		opacity: 0;
-	}
-	to {
-		opacity: 1;
-	}
-}
-
-/* ## Aba Esquerda */
-.leftTab {
-	grid-column: 1;
-	position: absolute;
-	top: 1.5rem;
-	border-right: unset;
-	border-top-left-radius: 1rem;
-	border-bottom-left-radius: 1rem;
-	transition: var(--side-transition);
-
-	padding: 0 0.3rem;
+/* ## Abas */
+.leftSmall {
 	width: 2rem;
 	height: 5rem;
 	left: 13rem;
-	writing-mode: sideways-lr;
 }
 
-.leftTab:hover {
+.rightSmall {
+	width: 2rem;
+	height: 5rem;
+	right: 13rem;
+}
+
+.leftSmall:hover,
+.leftBig {
 	padding: 1rem;
 	width: 12rem;
 	height: 19rem;
 	left: 3rem;
-	writing-mode: unset;
 }
 
-/* ## Aba Direita */
-.rightTab {
-	grid-column: 3;
-	position: absolute;
-	top: 1.5rem;
-	border-left: unset;
-	border-top-right-radius: 1rem;
-	border-bottom-right-radius: 1rem;
-	transition: var(--side-transition);
-
-	padding: 0 0.3rem;
-	width: 2rem;
-	height: 5rem;
-	right: 13rem;
-	writing-mode: sideways-rl;
-}
-
-.rightTab:hover {
+.rightSmall:hover,
+.rightBig {
 	padding: 1rem;
 	width: 12rem;
 	height: 19rem;
 	right: 3rem;
-	writing-mode: unset;
 }
 
-.rightTab:hover .rightContent {
+#leftTitle,
+#rightTitle {
 	display: block;
+	text-align: center;
+	font-weight: 600;
+	animation: var(--content-transition) TitleFadeIn;
+}
+
+.leftTitle {
+	transform: rotate(-90deg);
+	margin: 1.5rem 0;
+}
+
+#leftTab:hover .leftTitle,
+#rightTab:hover .rightTitle {
+	margin: 0;
+	animation: var(--content-transition) HoverFadeIn;
+	transform: rotate(0deg);
+}
+
+.rightTitle {
+	transform: rotate(90deg);
+	margin: 1.2rem 0;
+}
+
+#rightContent,
+#leftContent {
+	margin-top: 1rem;
+	text-align: justify;
+	animation: var(--content-transition) ContentFadeIn;
+}
+
+.leftContent,
+.rightContent {
+	display: none;
+}
+
+.displayBlock,
+#leftTab:hover .leftContent,
+#rightTab:hover .rightContent,
+#leftTab:hover i,
+#rightTab:hover i {
+	display: block;
+}
+
+#leftTab i,
+#rightTab i {
+	z-index: 1;
+	cursor: pointer;
+	color: var(--poke-blue);
+	position: absolute;
+	display: none;
+	animation: var(--content-transition) PinFadeIn;
+}
+
+#rightTab i {
+	right: 1rem;
+}
+
+/* DESATIVADO */
+#leftTab {
+	/* Remova o display pra reativar a aba */
+	display: none;
+
+	grid-column: 1;
+	border-right: unset;
+	border-top-left-radius: 1rem;
+	border-bottom-left-radius: 1rem;
+	position: absolute;
+	top: 1.5rem;
+	transition: var(--tab-transition);
+}
+
+#rightTab {
+	grid-column: 3;
+	border-left: unset;
+	border-top-right-radius: 1rem;
+	border-bottom-right-radius: 1rem;
+	position: absolute;
+	top: 1.5rem;
+	transition: var(--tab-transition);
 }
 
 /* ## GameBoy - Conteúdo Central */
@@ -182,37 +187,38 @@ img:hover {
 	grid-column: 1;
 	padding-top: 0.5rem;
 	position: relative;
-}
-
-.buttons i {
 	color: #3761a8;
-	cursor: pointer;
 }
 
-.buttons i:active {
-	color: #c52018;
+.buttons i:active,
+.btnActive {
+	color: var(--poke-red);
 }
 
 #prevPoke {
 	position: absolute;
+	cursor: pointer;
 	top: 2.5rem;
 	left: 1rem;
 }
 
 #nextSprite {
 	position: absolute;
+	cursor: pointer;
 	top: 0.8rem;
 	left: 2.5rem;
 }
 
 #nextPoke {
 	position: absolute;
+	cursor: pointer;
 	top: 2.5rem;
 	left: 4.5rem;
 }
 
 #prevSprite {
 	position: absolute;
+	cursor: pointer;
 	top: 4.2rem;
 	left: 2.5rem;
 }
@@ -238,10 +244,12 @@ img:hover {
 
 /* ### Pesquisa */
 .input {
-	margin: 1rem auto;
+	margin: 1rem;
+	margin-bottom: 0;
 	grid-row: 3;
 	grid-column: 1 / span 2;
 	position: relative;
+	text-align: center;
 }
 
 #pokeInput,
@@ -254,6 +262,12 @@ img:hover {
 	border: none;
 	border-radius: 0.5rem;
 	text-align: center;
+	bottom: 1rem;
+	outline: 0;
+}
+
+#pokeInput::placeholder {
+	color: #abc;
 }
 
 #pokeBtn:hover {
@@ -261,8 +275,7 @@ img:hover {
 }
 
 #pokeBtn:active {
-	color: #94b4d6;
-	cursor: pointer;
+	color: #abc;
 }
 
 #pokeWrong {
@@ -270,7 +283,45 @@ img:hover {
 	color: #cc0033;
 	font-size: 0.8rem;
 	margin-top: 0.1rem;
-	position: fixed;
-	left: 0;
-	right: 0;
+}
+
+/*
+	# @Keyframes utilizados, são todos iguais por que
+	as animações [as vezes] falhavam quando eram usados
+	por mais de um elemento...
+*/
+@keyframes TitleFadeIn {
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
+	}
+}
+
+@keyframes HoverFadeIn {
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
+	}
+}
+
+@keyframes ContentFadeIn {
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
+	}
+}
+
+@keyframes PinFadeIn {
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
+	}
 }
