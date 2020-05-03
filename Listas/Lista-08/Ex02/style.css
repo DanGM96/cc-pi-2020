@@ -11,10 +11,23 @@
 	--content-transition: 1.5s;
 }
 
+header {
+	display: grid;
+	grid-template-columns: 15rem 15rem 15rem;
+	width: 45rem;
+	margin: 0 auto;
+	margin-top: 2rem;
+}
+
+h1 {
+	grid-column: 2;
+	text-align: center;
+}
+
 .container {
 	display: grid;
 	grid-template-columns: 1fr 1fr 1fr;
-	margin: 5% auto;
+	margin: 2rem auto;
 	width: 45rem;
 	height: 22rem;
 	position: relative;
@@ -68,7 +81,7 @@
 
 .leftTitle {
 	transform: rotate(-90deg);
-	margin: 1.5rem 0;
+	margin: 1.7rem 0;
 }
 
 #leftTab:hover .leftTitle,
@@ -86,8 +99,29 @@
 #rightContent,
 #leftContent {
 	margin-top: 1rem;
-	text-align: justify;
 	animation: var(--content-transition) ContentFadeIn;
+	height: 13.2rem;
+	overflow: hidden;
+	scrollbar-width: thin;
+	scroll-behavior: smooth;
+	scrollbar-color: var(--poke-blue) var(--poke-yellow);
+}
+
+#leftContent:hover {
+	overflow-y: auto;
+}
+
+::-webkit-scrollbar {
+	width: 6px;
+}
+
+::-webkit-scrollbar-thumb {
+	background: var(--poke-blue);
+}
+
+#leftContent span {
+	display: block;
+	font-size: 0.8rem;
 }
 
 .leftContent,
@@ -117,11 +151,7 @@
 	right: 1rem;
 }
 
-/* DESATIVADO */
 #leftTab {
-	/* Remova o display pra reativar a aba */
-	display: none;
-
 	grid-column: 1;
 	border-right: unset;
 	border-top-left-radius: 1rem;

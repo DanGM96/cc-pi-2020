@@ -1,4 +1,4 @@
-let pokeList; // Guarda a lista de todos os pokémons
+let pokeList; // Guarda a lista de todos os pokémon
 let currentIndex = -1; // Index inicial da lista
 let currentPokemon; // Guarda o pokémon atual
 let currentSprite = 4; // Guarda a chave do sprite (padrão = 4)
@@ -116,16 +116,22 @@ function getPokemon(url) {
 }
 
 // Pesquisa se há o pokemon na lista local, antes de pedir o fetch
-function searchList(key, input) {
+function searchPokemon(key, input) {
+	// Encontra o primeiro elemente de uma lista com conteúdo próximo do input
 	let search = pokeList.find(
 		(poke) => poke[key].indexOf(input.toLowerCase()) >= 0
 	);
-	console.log(search);
+
 	if (search == null) {
 		doc("pokeWrong").style.display = "block";
 	} else {
 		doc("pokeWrong").style.display = "none";
 		let url = search.url;
+
+		// O search encontrava Bulbasaur pois encontrava o 2 de .../api/v2/... antes
+		if (input == 2) {
+			url = `https://pokeapi.co/api/v2/pokemon/2/`;
+		}
 		getPokemon(url);
 	}
 }
@@ -137,9 +143,9 @@ doc("pokeBtn").onclick = () => {
 
 	if (input !== "" && input != null) {
 		if (isNaN(input)) {
-			searchList("name", input);
+			searchPokemon("name", input);
 		} else {
-			searchList("url", input);
+			searchPokemon("url", input);
 		}
 	}
 };
@@ -235,8 +241,7 @@ document.onkeyup = () => {
 	}
 };
 
-// Pin da aba esquerda DESATIVADO - Ative no CSS, depois retire a função do comentário
-/*
+// Pin da aba esquerda
 doc("leftPin").onclick = () => {
 	let tab = doc("leftTab");
 
@@ -252,7 +257,6 @@ doc("leftPin").onclick = () => {
 		doc("leftContent").classList.remove("displayBlock");
 	}
 };
-*/
 
 // Pin da aba direita
 doc("rightPin").onclick = () => {

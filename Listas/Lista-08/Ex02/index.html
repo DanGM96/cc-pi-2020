@@ -11,22 +11,35 @@
 		></script>
 	</head>
 	<body>
+		<header>
+			<h1>My Pokédex</h1>
+		</header>
 		<div class="container">
 			<!-- Desativado - Ative no CSS -->
 			<div id="leftTab" class="leftSmall">
 				<i id="leftPin" class="fas fa-thumbtack"></i>
-				<div id="leftTitle" class="leftTitle">List</div>
+				<div id="leftTitle" class="leftTitle">Help</div>
 				<div id="leftContent" class="leftContent">
-					<div class="">1</div>
-					<div class="">2</div>
-					<div class="">3</div>
-					<div class="">4</div>
-					<div class="">5</div>
-					<div class="">6</div>
-					<div class="">7</div>
-					<div class="">8</div>
-					<div class="">9</div>
-					<div class="">10</div>
+					<div>
+						What is a Pokédex?
+						<span>
+							A mini-encyclopedia of Pokémon species, types and stats.
+						</span>
+						<br />
+						How to use:
+						<span>
+							<b>Left</b> and <b>Right</b> arrows change the Pokémon.
+						</span>
+						<span>
+							<b>Up</b> and <b>Down</b> arrows change the Image, some
+							unavailable!
+						</span>
+						<br />
+						<span>
+							To search for a Pokémon insert it's name or ID in the
+							<b>Battle</b> box, then press the <b>Catch</b> button!
+						</span>
+					</div>
 				</div>
 			</div>
 
@@ -72,12 +85,13 @@
 						id="pokeInput"
 						title="Type a number or name"
 						placeholder="Battle"
+						autofocus
 					/>
 					<input
 						type="button"
 						value="Catch"
 						id="pokeBtn"
-						title="Search Pokémons"
+						title="Search Pokémon"
 					/>
 					<div id="pokeWrong">Pokémon não encontrado</div>
 				</div>
