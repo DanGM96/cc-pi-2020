@@ -1,0 +1,68 @@
+/* # Preparações iniciais */
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	font-family: Arial, Helvetica, sans-serif;
+	--poke-yellow: #feca1b;
+	--poke-blue: #3761a8;
+	--poke-red: #c52018;
+}
+
+body {
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+}
+
+header {
+	margin: 0 auto;
+	margin-top: 2rem;
+	font-weight: 600;
+	font-size: 1.5rem;
+}
+
+.container {
+	margin: 2rem auto;
+}
+
+#board {
+	display: grid;
+	border: 2px solid black;
+}
+
+#middleCell,
+.cell {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 100px;
+	height: 100px;
+	border: 2px solid black;
+}
+
+.cell {
+	cursor: pointer;
+}
+
+#middleCell img,
+.hdImg {
+	width: 80%;
+}
+
+.sdImg {
+	width: 100%;
+}
+
+.hidden {
+	display: none;
+}
+
+.selected {
+	background-color: lightgray;
+}
+
+img.loading {
+	width: 100%;
+	filter: invert(100%);
+}
