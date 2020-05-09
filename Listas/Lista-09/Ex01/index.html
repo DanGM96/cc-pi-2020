@@ -14,17 +14,67 @@
 		<header>
 			<div>PokéBingo</div>
 		</header>
+
 		<main class="container">
-			<div id="board">
-				<div id="middleCell">
-					<img
-						src="https://storage.needpix.com/rsynced_images/pokemon-1536847_1280.png"
-						alt=""
-					/>
+			<div id="gameArea" class="hidden">
+				<div id="board" class="board"></div>
+				<div class="draw">
+					<img id="drawHD" class="hdImg" src="" alt="" />
+					<img id="drawSD" class="sdImg" src="" alt="" />
 				</div>
-				<!-- <img class="loading" src="https://pokeres.bastionbot.org/pokeball.gif" alt="" /> -->
 			</div>
 		</main>
+
+		<div>
+			<button id="startBtn">Start</button>
+			<button id="bingoBtn">Bingo!</button>
+			<button id="optBtn">Options</button>
+		</div>
+
+		<div id="optScreen" class="hidden">
+			<div class="optContainer">
+				<div class="optArea">
+					<div class="optHead">Options</div>
+					<div class="genArea">
+						<span>Generation: </span>
+						<select id="genChoice">
+							<option value="0" class="" selected>1</option>
+							<option value="1" class="">2</option>
+							<option value="2" class="">3</option>
+							<option value="3" class="">4</option>
+							<option value="4" class="">5</option>
+							<option value="5" class="">6</option>
+							<option value="6" class="">7</option>
+						</select>
+					</div>
+					<div class="sideArea">
+						<span>Rows: </span>
+						<select id="row">
+							<option value="3" class="">3</option>
+							<option value="4" class="">4</option>
+							<option value="5" class="" selected>5</option>
+							<option value="6" class="">6</option>
+							<option value="7" class="">7</option>
+						</select>
+						<span>Columns: </span>
+						<select id="column">
+							<option value="3" class="">3</option>
+							<option value="4" class="">4</option>
+							<option value="5" class="" selected>5</option>
+							<option value="6" class="">6</option>
+							<option value="7" class="">7</option>
+						</select>
+					</div>
+					<button id="imgBtn">Image quality</button>
+					<div id="buttons">
+						<button id="restoreBtn">Restore</button>
+						<button id="cancelBtn">Cancel</button>
+						<button id="confirmBtn">Confirm</button>
+					</div>
+				</div>
+			</div>
+		</div>
 		<script src="scripts.js"></script>
+		<!-- <img class="loading" src="https://pokeres.bastionbot.org/pokeball.gif" alt="" /> -->
 	</body>
 </html>

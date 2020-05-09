@@ -11,43 +11,94 @@ const generation = [
 	{ name: 7, start: 722, amount: 88 },
 	{ name: 8, start: 810, amount: 85 },
 ];
-let bingo = new Set(); // Set para guardar os números do bingo
 
-prepareGame();
+let genList, drawnList, boardList; // arrays
+let gen = generation[doc("genChoice").value];
+let row = doc("row").value;
+let column = doc("column").value;
+let gameTimer; // setInterval
+let isHD = true; // Bool para a escolha das imagens
 
-function setGrid(side) {
-	document.getElementById(
-		"board"
-	).style.gridTemplateColumns = `repeat(${side}, 1fr)`;
-	// grid-template-columns: repeat(5, 1fr);
-}
-
-function getPokeNum(gen) {
-	return Math.floor(Math.random() * gen.amount) + gen.start;
-}
-
-function toggleImg() {
-	let img = document.getElementsByClassName("cellImg");
-	for (let i = 0; i < img.length; i++) {
-		img[i].classList.toggle("hidden");
+function fillList(array) {
+	for (let i = gen.start; i < gen.start + gen.amount; i++) {
+		array.push(i);
 	}
 }
 
-function createCells() {
-	let i = 0;
-	bingo.forEach((number) => {
-		let parent = document.getElementById("board");
+function drawPoke(arrayIn, arrayOut) {
+	// Random index dentro da lista
+	let rnd = Math.floor(Math.random() * arrayIn.length);
+	let number = arrayIn[rnd];
+	arrayIn.splice(rnd, 1);
+	arrayOut.push(number);
+
+	return number;
+}
+
+function myTimer() {
+	number = drawPoke(genList, drawnList);
+	doc(
+		"drawHD"
+	).src = `https://pokeres.bastionbot.org/images/pokemon/${number}.png`;
+	doc(
+		"drawSD"
+	).src = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${number}.png`;
+	toggleImg();
+
+	if (genList.length === 0) {
+		stopTimer();
+		alert("Acabaram os pokémons. Agora você ganha né?");
+	}
+}
+
+// Apenas para reduzir repetição
+function doc(id) {
+	return document.getElementById(id);
+}
+
+function toggleOptions() {
+	doc("optScreen").classList.toggle("hidden");
+}
+
+function setGrid(side) {
+	doc("board").style.gridTemplateColumns = `repeat(${side}, 1fr)`;
+	// grid-template-columns: repeat(5, 1fr);
+}
+
+function toggleImg() {
+	let hideImg;
+	let showImg;
+
+	if (isHD === true) {
+		showImg = document.getElementsByClassName("hdImg");
+		hideImg = document.getElementsByClassName("sdImg");
+	} else {
+		hideImg = document.getElementsByClassName("hdImg");
+		showImg = document.getElementsByClassName("sdImg");
+	}
+
+	for (let i = 0; i < hideImg.length; i++) {
+		hideImg[i].classList.add("hidden");
+	}
+	for (let i = 0; i < showImg.length; i++) {
+		showImg[i].classList.remove("hidden");
+	}
+}
+
+function createCells(array) {
+	array.forEach((number) => {
+		let parent = doc("board");
 		let div = document.createElement("div");
 
 		// Imagem com Alta Resolução / Fanart
 		let imgHD = document.createElement("img");
 		imgHD.src = `https://pokeres.bastionbot.org/images/pokemon/${number}.png`;
-		imgHD.classList.add("cellImg", "hdImg");
+		imgHD.classList.add("hdImg");
 
 		// Imagem com Baixa Resolução / Original
 		let imgSD = document.createElement("img");
 		imgSD.src = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${number}.png`;
-		imgSD.classList.add("cellImg", "sdImg", "hidden");
+		imgSD.classList.add("sdImg");
 
 		div.addEventListener("click", () => {
 			div.classList.toggle("selected");
@@ -57,31 +108,137 @@ function createCells() {
 		div.append(imgHD);
 		div.append(imgSD);
 
-		if (i < bingo.size / 2) {
-			parent.insertBefore(div, document.getElementById("middleCell"));
-		} else {
-			parent.append(div);
-		}
-		i++;
+		parent.append(div);
 	});
+	toggleImg();
 }
 
-function prepareGame(gen = generation[0], side = 5) {
-	bingo.clear(); // Limpa o set
-	let cellAmount = side * side - 1; // Calcula quantas células serão geradas
+function prepareGame() {
+	stopTimer();
+	boardList = [];
+	drawnList = [];
+	genList = [];
+	fillList(genList);
+
+	doc("startBtn").innerHTML = "Restart";
+	doc("gameArea").classList.remove("hidden");
+	doc("board").innerHTML = ""; // Limpa o jogo
+	doc("drawHD").src = "";
+	doc("drawSD").src = "";
+
+	let cellAmount = row * column; // Calcula quantas células serão geradas
 
 	if (cellAmount <= gen.amount) {
-		setGrid(side);
+		setGrid(column);
 
-		while (bingo.size < cellAmount) {
-			bingo.add(getPokeNum(gen));
+		let auxList = genList.slice();
+		while (boardList.length < cellAmount) {
+			drawPoke(auxList, boardList);
 		}
 	} else {
+		console.log("Não há pokémons suficientes para preencher a tabela!");
 		return;
 	}
-	createCells();
+	createCells(boardList);
+	startTimer();
 }
 
-document.getElementById("middleCell").onclick = () => {
+function startTimer() {
+	if (!gameTimer) {
+		gameTimer = setInterval(myTimer, 5000);
+	}
+}
+
+function stopTimer() {
+	clearInterval(gameTimer);
+	gameTimer = false;
+}
+
+function isNull() {
+	return genList == null && drawnList == null && boardList == null;
+}
+
+doc("startBtn").onclick = () => {
+	prepareGame();
+};
+
+doc("bingoBtn").onclick = () => {
+	stopTimer();
+	let board = doc("board");
+
+	if (isNull()) {
+		alert("Ainda não começou o jogo, meu caro?");
+		return;
+	}
+
+	// Verifica se a quantidade de filhos de "#board" é a mesma quantidade de elementos com ".selected", já que apenas elementos ".cell" são filhos de "#board" e podem ter ".selected".
+	if (board.children.length == board.querySelectorAll(".selected").length) {
+		// Se a drawnList incluí tudo da boardList
+		if (boardList.every((i) => drawnList.includes(i))) {
+			alert("B I N G O !");
+		} else {
+			alert("Ops... você marcou um pokémon errado.");
+		}
+	} else {
+		alert("Pra vencer, tem que marcar todos os pokémons!");
+	}
+
+	if (genList.length !== 0) {
+		startTimer();
+	}
+};
+
+doc("optBtn").onclick = () => {
+	stopTimer();
+	toggleOptions();
+};
+
+doc("imgBtn").onclick = () => {
+	isHD = !isHD;
 	toggleImg();
+};
+
+doc("restoreBtn").onclick = () => {
+	doc("genChoice").value = 0;
+	doc("row").value = 5;
+	doc("column").value = 5;
+};
+
+doc("cancelBtn").onclick = () => {
+	toggleOptions();
+
+	if (isNull()) {
+		return;
+	}
+	startTimer();
+};
+
+doc("confirmBtn").onclick = () => {
+	let auxGen = generation[doc("genChoice").value];
+	let auxRow = doc("row").value;
+	let auxColumn = doc("column").value;
+
+	if (gen !== auxGen || row !== auxRow || column !== auxColumn) {
+		gen = auxGen;
+		row = auxRow;
+		column = auxColumn;
+		prepareGame();
+	}
+	toggleOptions();
+
+	if (isNull()) {
+		return;
+	}
+	startTimer();
+};
+
+document.onkeydown = () => {
+	if (event.keyCode === 27) {
+		if (!gameTimer) {
+			startTimer();
+		} else {
+			stopTimer();
+		}
+		toggleOptions();
+	}
 };
