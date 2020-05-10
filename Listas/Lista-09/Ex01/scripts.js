@@ -12,19 +12,68 @@ const generation = [
 	{ name: 8, start: 810, amount: 85 },
 ];
 
-let genList, drawnList, boardList; // arrays
-let gen = generation[doc("genChoice").value];
-let row = doc("row").value;
-let column = doc("column").value;
-let gameTimer; // setInterval
-let isHD = true; // Bool para a escolha das imagens
+let genList, // Guarda a lista da geração
+	drawnList, // Guarda a lista sorteada com o timer
+	boardList, // Guarda a lista da tablea
+	gen = generation[doc("generation").value], // opções
+	row = doc("row").value, // opções
+	column = doc("column").value, // opções
+	speed = doc("speed").value, // opções
+	gameTimer, // setInterval
+	isHD = true, // Bool para a escolha das imagens
+	didWin = false; // Bool para saber se o jogador venceu ou não
 
+// Carrega os pokémons sorteados
+function loadDraw() {
+	if (genList.length === 0) {
+		stopTimer();
+		if (!didWin) {
+			alert("Acabaram os pokémons. Agora você ganha né?");
+		}
+		return;
+	}
+
+	number = drawPoke(genList, drawnList);
+	doc("drawArea").classList.remove("loading");
+
+	doc(
+		"drawHD"
+	).src = `https://pokeres.bastionbot.org/images/pokemon/${number}.png`;
+
+	doc(
+		"drawSD"
+	).src = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${number}.png`;
+
+	toggleImg();
+}
+
+// Começa o setInterval se a variável for falsa (previne que ele possa ser ativado mais de uma vez por acidente)
+function startTimer() {
+	if (!gameTimer) {
+		toggleImg();
+		gameTimer = setInterval(loadDraw, speed * 1000);
+	}
+}
+
+// Limpa o setInterval e dá um valor de falso para a variável
+function stopTimer() {
+	clearInterval(gameTimer);
+	gameTimer = false;
+}
+
+// Usado pra previnir as diversas maneiras que o setInterval possa começar
+function isNullLists() {
+	return genList == null && drawnList == null && boardList == null;
+}
+
+// Enche uma lista com a geração atual
 function fillList(array) {
 	for (let i = gen.start; i < gen.start + gen.amount; i++) {
 		array.push(i);
 	}
 }
 
+// Remove o valor de uma array e coloca em outra, assim evitando repetições
 function drawPoke(arrayIn, arrayOut) {
 	// Random index dentro da lista
 	let rnd = Math.floor(Math.random() * arrayIn.length);
@@ -35,36 +84,23 @@ function drawPoke(arrayIn, arrayOut) {
 	return number;
 }
 
-function myTimer() {
-	number = drawPoke(genList, drawnList);
-	doc(
-		"drawHD"
-	).src = `https://pokeres.bastionbot.org/images/pokemon/${number}.png`;
-	doc(
-		"drawSD"
-	).src = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${number}.png`;
-	toggleImg();
-
-	if (genList.length === 0) {
-		stopTimer();
-		alert("Acabaram os pokémons. Agora você ganha né?");
-	}
-}
-
 // Apenas para reduzir repetição
 function doc(id) {
 	return document.getElementById(id);
 }
 
+// Abre ou fecha o menu options
 function toggleOptions() {
 	doc("optScreen").classList.toggle("hidden");
 }
 
+// Cria o formato da grid baseado na coluna
 function setGrid(side) {
 	doc("board").style.gridTemplateColumns = `repeat(${side}, 1fr)`;
 	// grid-template-columns: repeat(5, 1fr);
 }
 
+// Muda entre imagens HD e SD
 function toggleImg() {
 	let hideImg;
 	let showImg;
@@ -85,6 +121,7 @@ function toggleImg() {
 	}
 }
 
+// Cria as divs e imgs para a tabela do bingo
 function createCells(array) {
 	array.forEach((number) => {
 		let parent = doc("board");
@@ -113,6 +150,7 @@ function createCells(array) {
 	toggleImg();
 }
 
+// Faz todo o necessário para começar um jogo do zero
 function prepareGame() {
 	stopTimer();
 	boardList = [];
@@ -120,11 +158,12 @@ function prepareGame() {
 	genList = [];
 	fillList(genList);
 
-	doc("startBtn").innerHTML = "Restart";
-	doc("gameArea").classList.remove("hidden");
+	doc("drawArea").classList.add("loading"); // Aciona o gif de carregamento
+	doc("startBtn").innerHTML = "Restart"; // Muda o nome do botão
+	doc("gameArea").classList.remove("hidden"); // Mostra o jogo
 	doc("board").innerHTML = ""; // Limpa o jogo
-	doc("drawHD").src = "";
-	doc("drawSD").src = "";
+	doc("drawHD").src = ""; // Limpa o drawHD
+	doc("drawSD").src = ""; // Limpa o drawSD
 
 	let cellAmount = row * column; // Calcula quantas células serão geradas
 
@@ -136,37 +175,27 @@ function prepareGame() {
 			drawPoke(auxList, boardList);
 		}
 	} else {
-		console.log("Não há pokémons suficientes para preencher a tabela!");
+		console.log(
+			"Não há pokémons suficientes para preencher a tabela!",
+			"Alguém modificou a const generation... Foi você?!"
+		);
 		return;
 	}
 	createCells(boardList);
 	startTimer();
 }
 
-function startTimer() {
-	if (!gameTimer) {
-		gameTimer = setInterval(myTimer, 5000);
-	}
-}
-
-function stopTimer() {
-	clearInterval(gameTimer);
-	gameTimer = false;
-}
-
-function isNull() {
-	return genList == null && drawnList == null && boardList == null;
-}
-
+// Botão Start
 doc("startBtn").onclick = () => {
 	prepareGame();
 };
 
+// Botão Bingo! faz todas as verificações necessárias para confirmar se o jogador venceu
 doc("bingoBtn").onclick = () => {
 	stopTimer();
 	let board = doc("board");
 
-	if (isNull()) {
+	if (isNullLists()) {
 		alert("Ainda não começou o jogo, meu caro?");
 		return;
 	}
@@ -175,7 +204,9 @@ doc("bingoBtn").onclick = () => {
 	if (board.children.length == board.querySelectorAll(".selected").length) {
 		// Se a drawnList incluí tudo da boardList
 		if (boardList.every((i) => drawnList.includes(i))) {
-			alert("B I N G O !");
+			alert("B I N G O ! Meus parabéns, campeão!");
+			doc("gameArea").classList.add("hidden");
+			didWin = true;
 		} else {
 			alert("Ops... você marcou um pokémon errado.");
 		}
@@ -188,35 +219,42 @@ doc("bingoBtn").onclick = () => {
 	}
 };
 
+// Botão Options
 doc("optBtn").onclick = () => {
 	stopTimer();
 	toggleOptions();
 };
 
+// Botão Quality (menu)
 doc("imgBtn").onclick = () => {
 	isHD = !isHD;
 	toggleImg();
 };
 
+// Botão Restore (menu)
 doc("restoreBtn").onclick = () => {
-	doc("genChoice").value = 0;
+	doc("generation").value = 0;
 	doc("row").value = 5;
 	doc("column").value = 5;
+	doc("speed").value = 5;
 };
 
+// Botão Cancel (menu)
 doc("cancelBtn").onclick = () => {
 	toggleOptions();
 
-	if (isNull()) {
+	if (isNullLists()) {
 		return;
 	}
 	startTimer();
 };
 
+// Botão Confirm (menu)
 doc("confirmBtn").onclick = () => {
-	let auxGen = generation[doc("genChoice").value];
+	let auxGen = generation[doc("generation").value];
 	let auxRow = doc("row").value;
 	let auxColumn = doc("column").value;
+	speed = doc("speed").value;
 
 	if (gen !== auxGen || row !== auxRow || column !== auxColumn) {
 		gen = auxGen;
@@ -226,15 +264,17 @@ doc("confirmBtn").onclick = () => {
 	}
 	toggleOptions();
 
-	if (isNull()) {
+	if (isNullLists()) {
 		return;
 	}
 	startTimer();
 };
 
-document.onkeydown = () => {
+// Tecla ESC
+document.onkeyup = () => {
+	// se ESC for pressionado
 	if (event.keyCode === 27) {
-		if (!gameTimer) {
+		if (!gameTimer && !isNullLists()) {
 			startTimer();
 		} else {
 			stopTimer();

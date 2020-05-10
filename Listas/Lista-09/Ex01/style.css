@@ -10,12 +10,32 @@
 }
 
 body {
+	width: 100vw;
+	height: 100vh;
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	flex-direction: column;
+	background-image: url("https://www.publicdomainpictures.net/pictures/70000/velka/natural-green-background.jpg");
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: left;
 }
 
+.hidden {
+	display: none;
+}
+
+.separator {
+	margin: 1rem 0;
+}
+
+.spacing {
+	display: flex;
+	justify-content: space-between;
+}
+
+/* ## Header - Page Title */
 header {
 	margin: 0 auto;
 	margin-top: 2rem;
@@ -23,10 +43,7 @@ header {
 	font-size: 1.5rem;
 }
 
-.hidden {
-	display: none;
-}
-
+/* ## Game Area */
 .container {
 	margin: 2rem auto;
 }
@@ -35,16 +52,9 @@ header {
 	display: grid;
 	margin: 1rem;
 	border: 1px solid rgba(211, 211, 211, 0.7);
+	background: rgba(255, 255, 255, 0.5);
 	user-select: none;
 	float: left;
-}
-
-.draw {
-	width: 300px;
-	float: right;
-	margin: 1rem;
-	background: rgba(255, 255, 255, 0.7);
-	border-radius: 0.5rem;
 }
 
 .cell {
@@ -66,14 +76,30 @@ header {
 }
 
 .selected {
-	background-color: rgba(76, 160, 76, 0.7);
+	background-color: rgba(32, 127, 23, 0.7);
 }
 
-img.loading {
-	width: 100%;
+.draw {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 300px;
+	height: 300px;
+	float: right;
+	margin: 1rem;
+	background: rgba(255, 255, 255, 0.5);
+	border-radius: 0.5rem;
+}
+
+.loading {
+	background-image: url("https://pokeres.bastionbot.org/pokeball.gif");
 	filter: invert(100%);
+	opacity: 0.6;
+	background-position: center center;
+	background-size: cover;
 }
 
+/* ## Menu Area */
 #optScreen {
 	position: fixed;
 	width: 100%;
@@ -92,6 +118,7 @@ img.loading {
 	justify-content: center;
 	align-items: center;
 }
+
 .optArea {
 	background: rgba(255, 255, 255, 0.7);
 	border-radius: 0.2rem;
@@ -101,12 +128,47 @@ img.loading {
 }
 
 .optHead {
+	text-align: center;
 	font-weight: 600;
 	font-size: 1.5rem;
 	padding-bottom: 0.5rem;
 	border-bottom: 1px solid black;
 }
 
-.optArea div {
-	padding-top: 0.5rem;
+.buttons {
+	border-top: 1px solid rgba(0, 0, 0, 0.7);
+}
+
+button {
+	text-decoration: none;
+	text-align: center;
+	border: none;
+	width: 4rem;
+	height: 2rem;
+	font-size: 0.9rem;
+	transition: 0.3s;
+	cursor: pointer;
+	margin-top: 1rem;
+	border-radius: 0.2rem;
+	color: black;
+	border: 2px solid var(--poke-blue);
+}
+
+button:hover {
+	background-color: var(--poke-blue);
+	color: white;
+}
+
+#imgBtn {
+	font-size: 0.8rem;
+	margin: 0;
+	height: auto;
+}
+
+#confetti {
+	position: absolute;
+	left: 0;
+	top: 0;
+	height: 100%;
+	width: 100%;
 }

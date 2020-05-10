@@ -18,7 +18,7 @@
 		<main class="container">
 			<div id="gameArea" class="hidden">
 				<div id="board" class="board"></div>
-				<div class="draw">
+				<div id="drawArea" class="draw">
 					<img id="drawHD" class="hdImg" src="" alt="" />
 					<img id="drawSD" class="sdImg" src="" alt="" />
 				</div>
@@ -34,10 +34,10 @@
 		<div id="optScreen" class="hidden">
 			<div class="optContainer">
 				<div class="optArea">
-					<div class="optHead">Options</div>
-					<div class="genArea">
-						<span>Generation: </span>
-						<select id="genChoice">
+					<div class="optHead">Options / Paused</div>
+					<div class="genOpt separator spacing">
+						<span>Pokémon Generation: </span>
+						<select id="generation">
 							<option value="0" class="" selected>1</option>
 							<option value="1" class="">2</option>
 							<option value="2" class="">3</option>
@@ -47,7 +47,7 @@
 							<option value="6" class="">7</option>
 						</select>
 					</div>
-					<div class="sideArea">
+					<div class="sideOpt separator spacing">
 						<span>Rows: </span>
 						<select id="row">
 							<option value="3" class="">3</option>
@@ -65,8 +65,20 @@
 							<option value="7" class="">7</option>
 						</select>
 					</div>
-					<button id="imgBtn">Image quality</button>
-					<div id="buttons">
+					<div class="imgOpt separator">
+						<span>Image speed: </span>
+						<select id="speed">
+							<option value="1" class="">1s</option>
+							<option value="2" class="">2s</option>
+							<option value="3" class="">3s</option>
+							<option value="4" class="">4s</option>
+							<option value="5" class="" selected>5s</option>
+							<option value="6" class="">6s</option>
+							<option value="7" class="">7s</option>
+						</select>
+						<button id="imgBtn">Quality</button>
+					</div>
+					<div class="buttons spacing">
 						<button id="restoreBtn">Restore</button>
 						<button id="cancelBtn">Cancel</button>
 						<button id="confirmBtn">Confirm</button>
