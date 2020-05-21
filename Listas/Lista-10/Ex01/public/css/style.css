@@ -1,0 +1,217 @@
+:root {
+	--font-family: "Open Sans", sans-serif;
+	--text-primary: #b6b6b6;
+	--text-primary-opaque: #b6b6b633;
+	--text-secondary: #ececec;
+	--bg-primary: #23232e;
+	--bg-secondary: #141418;
+	--accent-color: #6649b8;
+	--transition-speed: 600ms;
+	font-size: 16px;
+	font-family: var(--font-family);
+}
+
+body {
+	color: var(--text-primary);
+	margin: 0;
+	padding: 0;
+	background-color: var(--bg-secondary);
+}
+
+/* https://leaverou.github.io/css3patterns/#starry-night
+NOT IN USE */
+
+#stars-background {
+	background-size: cover;
+	background-color: black;
+	background-image: radial-gradient(
+			white,
+			rgba(255, 255, 255, 0.2) 2px,
+			transparent 40px
+		),
+		radial-gradient(white, rgba(255, 255, 255, 0.15) 1px, transparent 30px),
+		radial-gradient(white, rgba(255, 255, 255, 0.1) 2px, transparent 40px),
+		radial-gradient(
+			rgba(255, 255, 255, 0.4),
+			rgba(255, 255, 255, 0.1) 2px,
+			transparent 30px
+		);
+	background-size: 550px 550px, 350px 350px, 250px 250px, 150px 150px;
+	background-position: 0 0, 40px 60px, 130px 270px, 70px 100px;
+}
+
+main * {
+	box-sizing: border-box;
+}
+
+main {
+	margin-left: 5rem;
+	padding: 1rem;
+}
+
+.container {
+	margin: 0;
+	padding: 0;
+	float: inline-start;
+	border-top: 1px solid var(--text-primary-opaque);
+	width: 100%;
+}
+
+img {
+	border: 1px solid var(--text-primary);
+	width: 200px;
+	margin-bottom: 1rem;
+	height: auto;
+}
+
+.img-right {
+	float: right;
+	margin-left: 1rem;
+}
+
+.img-left {
+	float: left;
+	margin-right: 1rem;
+}
+
+ul {
+	list-style: disc;
+}
+
+/* ::::::Menu:::::: */
+
+.navbar {
+	position: fixed;
+	background-color: var(--bg-primary);
+	transition: width var(--transition-speed) ease;
+}
+
+/* Firefox Scrollbar */
+
+.scrollbar {
+	overflow-x: scroll;
+	overflow-y: auto;
+	scrollbar-color: var(--accent-color) var(--bg-primary);
+	scrollbar-width: thin;
+}
+
+/* Chromium and Safari Scrollbar INÍCIO */
+
+.navbar::-webkit-scrollbar {
+	width: 0.25rem;
+	height: 0.25rem;
+}
+
+.navbar::-webkit-scrollbar-track {
+	background: var(--bg-primary);
+}
+
+.navbar::-webkit-scrollbar-thumb {
+	background: var(--accent-color);
+}
+
+.navbar::-webkit-scrollbar-corner {
+	background-color: var(--bg-primary);
+}
+
+/* Chromium and Safari Scroll FIM */
+
+.navbar-nav {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	height: 100%;
+}
+
+.nav-item {
+	width: 100%;
+}
+
+.nav-link {
+	display: flex;
+	align-items: center;
+	height: 5rem;
+	color: var(--text-primary);
+	text-decoration: none;
+	opacity: 0.7;
+	filter: grayscale(100%);
+	transition: var(--transition-speed);
+}
+
+.nav-link:hover {
+	opacity: 1;
+	filter: grayscale(0%);
+	background: var(--bg-secondary);
+	color: var(--text-secondary);
+}
+
+.link-text {
+	display: none;
+	margin-left: 1rem;
+}
+
+.nav-link svg {
+	width: 2rem;
+	min-width: 2rem;
+	margin: 0 1.5rem;
+}
+
+.fa-color {
+	color: var(--accent-color);
+	transition: var(--transition-speed);
+}
+
+#btnControl {
+	display: none;
+}
+
+/* Computadores (telas grandes) */
+
+@media only screen and (min-width: 600px) {
+	.navbar {
+		top: 0;
+		width: 5rem;
+		height: 100vh;
+	}
+	.navbar:not(:focus):hover {
+		width: 16rem;
+	}
+	.navbar:not(:focus):hover .link-text {
+		display: inline;
+	}
+	.navbar:focus {
+		width: 5rem;
+	}
+	.navbar:focus .link-text {
+		display: none;
+	}
+	.nav-item:last-child {
+		margin-top: auto;
+	}
+}
+
+/* Mobile (telas pequenas) */
+
+@media only screen and (max-width: 600px) {
+	main {
+		margin: 0;
+		margin-bottom: 5rem;
+	}
+	.navbar {
+		bottom: 0;
+		width: 100vw;
+		height: 5rem;
+	}
+	.scrollbar {
+		overflow-y: hidden;
+	}
+	.navbar-nav {
+		flex-direction: row;
+	}
+	.nav-link {
+		justify-content: center;
+	}
+}

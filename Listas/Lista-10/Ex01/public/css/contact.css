@@ -1,0 +1,100 @@
+.container {
+	/* Centralize in Firefox */
+	display: -moz-box;
+	-moz-box-pack: center;
+	-moz-box-align: center;
+	/* Centralize in Chromium and Safari */
+	display: -webkit-box;
+	-webkit-box-pack: center;
+	-webkit-box-align: center;
+}
+
+form p {
+	margin: 0;
+	text-align: right;
+	padding: 0.5rem 0;
+}
+
+form {
+	padding-top: 0.5rem;
+}
+
+.text {
+	float: left;
+	width: 6rem;
+	margin: 0;
+	padding-top: 0.5rem;
+	padding-right: 1.5rem;
+	text-align: right;
+	font-weight: bold;
+}
+
+.text,
+.text-box,
+.text-box-big,
+.btn-reset,
+.btn-submit {
+	border-radius: 5px;
+	color: var(--text-primary);
+	height: 2.5rem;
+	font-size: 1rem;
+	font-family: var(--font-family);
+}
+
+.text-box,
+.text-box-big {
+	background-color: var(--bg-primary);
+	border: 1px solid var(--text-primary-opaque);
+	box-shadow: none;
+	padding: 0.5rem 1rem;
+	width: 20rem;
+	transition: var(--transition-speed);
+}
+
+.text-box:placeholder-shown,
+.text-box-big:placeholder-shown {
+	color: var(--text-primary);
+}
+
+.text-box:focus,
+.text-box-big:focus {
+	outline: none;
+	border: 1px solid var(--accent-color);
+}
+
+.text-box-big {
+	height: 10rem;
+	resize: none;
+}
+
+.btn-reset,
+.btn-submit {
+	border: 1px solid var(--bg-secondary);
+	width: 5rem;
+	padding: 0 auto;
+	font-weight: bold;
+	margin-left: 0.5rem;
+	opacity: 0.7;
+	transition: var(--transition-speed);
+}
+
+.btn-reset {
+	color: var(--accent-color);
+	background-color: var(--text-primary);
+}
+
+.btn-reset:hover {
+	border: 1px solid var(--text-primary);
+	cursor: pointer;
+	opacity: 1;
+}
+
+.btn-submit {
+	background-color: var(--accent-color);
+}
+
+.btn-submit:hover {
+	border: 1px solid var(--accent-color);
+	cursor: pointer;
+	opacity: 1;
+}
