@@ -143,7 +143,7 @@ export default () => {
 				removeFruit({ fruitId: fruitId });
 
 				notifyAll({
-					type: "player-score",
+					type: "placar-player",
 					playerId,
 					score: ++player.score,
 				});

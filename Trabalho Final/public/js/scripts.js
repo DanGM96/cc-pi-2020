@@ -88,7 +88,7 @@ let conectar = (userData) => {
 		game.removeFruit(command);
 	});
 
-	socket.on("player-score", (command) => {
+	socket.on("placar-player", (command) => {
 		const player = game.state.players[command.playerId];
 		if (player == null) {
 			return;
